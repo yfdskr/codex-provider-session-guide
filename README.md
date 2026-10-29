@@ -2,7 +2,7 @@
 
 在 VS Code 中管理 Codex 的官方账号、第三方 API、对话、监控和备份。支持 Remote SSH：连接服务器后，管理的是服务器上的 Codex。
 
-**当前版本：0.6.0 预发布版。** 本项目独立开发，与 OpenAI 无隶属关系；GitHub 发布不代表已上架 VS Code Marketplace。
+**当前版本：0.6.0 预发布版，已发布到 GitHub。** 本项目独立开发，与 OpenAI 无隶属关系；GitHub 发布不代表已上架 VS Code Marketplace。
 
 [下载安装包](https://github.com/yfdskr/codex-provider-session-guide/releases/tag/v0.6.0) · [安装与使用](docs/安装与使用.md) · [常见问题](docs/常见问题.md) · [开发说明](CONTRIBUTING.md) · [完整验证记录](docs/发布与验证.md)
 
