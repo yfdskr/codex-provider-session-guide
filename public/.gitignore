@@ -1,0 +1,19 @@
+# Private runtime state must never enter this documentation repository.
+.env
+.env.*
+*.key
+*.pem
+auth.json
+.codex/
+sessions/
+archived_sessions/
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.db
+*.log
+logs/
+backups/
+.codex-session-backups/
+本机操作说明.md
+.DS_Store

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "types": [
+      "node",
+      "vscode"
+    ],
+    "paths": {
+      "@iarna/toml": [
+        "./node_modules/@iarna/toml"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "../core/**/*.ts",
+    "../agent/**/*.ts"
+  ]
+}

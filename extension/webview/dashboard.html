@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src {{CSP}}; script-src 'nonce-{{NONCE}}'; img-src {{CSP}}; font-src {{CSP}}; connect-src 'none'; base-uri 'none'; form-action 'none';">
+<link rel="stylesheet" href="{{CSS}}">
+<title>Codex 管理中心</title>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div id="app"><p class="loading" role="status">正在连接 Codex 管理中心…</p></div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+<div id="operation" role="status" aria-live="polite" hidden></div>
+<script nonce="{{NONCE}}" src="{{JS}}"></script>
+</body>
+</html>

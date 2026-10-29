@@ -1,0 +1,62 @@
+{
+  "version": "0.6.0",
+  "publicationPreparedDate": "2026-10-29",
+  "timezone": "Asia/Shanghai",
+  "repository": "yfdskr/codex-provider-session-guide",
+  "releaseType": "prerelease",
+  "marketplacePublished": false,
+  "typecheck": "passed",
+  "build": "passed",
+  "automatedTests": {
+    "passed": 79,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Synthetic credentials, temporary homes and loopback endpoints; explicit public Codex/sync executables"
+  },
+  "browserTests": {
+    "passed": 13,
+    "failed": 0,
+    "data": "synthetic"
+  },
+  "cleanSource": {
+    "npmCi": "passed",
+    "typecheck": "passed",
+    "package": "passed",
+    "tests": {
+      "passed": 69,
+      "failed": 0,
+      "skipped": 10
+    },
+    "skippedReason": "Optional real executable tests and historical 0.3.0 installer fixture not supplied"
+  },
+  "nativeIde": {
+    "passed": true,
+    "setupReloads": 1,
+    "switchReloads": 1,
+    "restoreReloads": 1,
+    "manifestUnchanged": true,
+    "nativeEntryRestoredExactly": true,
+    "externalModelRequests": 0,
+    "syntheticLoopbackRequests": 1,
+    "realCredentialsUsed": false
+  },
+  "runtimeIdenticalToLocal060": true,
+  "package": {
+    "file": "codex-provider-manager-0.6.0.vsix",
+    "sha256": "6d7313e5fb9ef59610918ac983d91e6854dfca673e78fe7719f8000bc9125056",
+    "entries": 17
+  },
+  "userAcceptance": {
+    "officialAccountSmoothSwitch": "confirmed",
+    "officialApiRoundTrip": "deferred",
+    "archiveMonitorBackupReloadSteps": "instructions provided; not claimed fully accepted"
+  },
+  "limits": [
+    "Linux x64 only verified",
+    "Pinned official extension 26.51007.21434 and known source hash",
+    "Responses streaming only; no Chat Completions converter",
+    "No arbitrary-window live task control",
+    "No cross-server conversation migration",
+    "No real external model requests in publication checks"
+  ]
+}

@@ -1,0 +1,32 @@
+# Never publish local credentials, machine notes or user data
+/本机操作说明.md
+/docs/Untitled-*.json
+.env
+.env.*
+!.env.example
+auth.json
+*.key
+*.pem
+*.p12
+*.pfx
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.jsonl
+.codex/
+.codex-provider-manager-backups/
+.local/
+
+# Generated dependencies, bundles, reports and private publication staging
+node_modules/
+dist/
+.test-build/
+.ui-test-results/
+playwright-report/
+artifacts/
+*.vsix
+*.log
+__pycache__/
+*.pyc
+.DS_Store

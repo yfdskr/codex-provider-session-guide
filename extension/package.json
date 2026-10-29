@@ -1,0 +1,362 @@
+{
+  "name": "codex-provider-manager",
+  "displayName": "Codex Provider Manager",
+  "description": "可视化 Codex 管理中心：供应商、API 故障切换、对话目录、自定义监控和完整备份。",
+  "version": "0.6.0",
+  "publisher": "yfdskr",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.95.0",
+    "node": ">=20"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "codex",
+    "provider",
+    "sessions",
+    "remote-ssh"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yfdskr/codex-provider-session-guide.git"
+  },
+  "main": "./dist/extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    },
+    "virtualWorkspaces": false
+  },
+  "activationEvents": [
+    "onView:codexProviderManager.providers",
+    "onStartupFinished"
+  ],
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs && node scripts/test.mjs",
+    "vscode:prepublish": "npm run check && npm run build",
+    "package": "vsce package --pre-release --no-dependencies --out artifacts/",
+    "test:ui": "playwright test"
+  },
+  "dependencies": {
+    "@iarna/toml": "2.2.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^22.0.0",
+    "@types/vscode": "1.95.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codexProviderManager",
+          "title": "Codex 管理",
+          "icon": "media/manager.svg"
+        }
+      ]
+    },
+    "views": {
+      "codexProviderManager": [
+        {
+          "id": "codexProviderManager.providers",
+          "name": "供应商",
+          "canSelectMany": false
+        },
+        {
+          "id": "codexProviderManager.sessions",
+          "name": "对话目录",
+          "canSelectMany": true
+        },
+        {
+          "id": "codexProviderManager.monitor",
+          "name": "监控与代理"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "codexProviderManager.openDashboard",
+        "title": "Codex 管理：打开可视化管理中心",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "codexProviderManager.officialInfo",
+        "title": "Codex 管理：查看官方账号入口"
+      },
+      {
+        "command": "codexProviderManager.addProvider",
+        "title": "Codex 管理：新增供应商",
+        "icon": "$(add)"
+      },
+      {
+        "command": "codexProviderManager.importProviders",
+        "title": "Codex 管理：导入配置中的供应商"
+      },
+      {
+        "command": "codexProviderManager.editProvider",
+        "title": "编辑供应商"
+      },
+      {
+        "command": "codexProviderManager.setKey",
+        "title": "设置 / 更新 API Key",
+        "icon": "$(key)"
+      },
+      {
+        "command": "codexProviderManager.removeProvider",
+        "title": "移除供应商",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "codexProviderManager.testProvider",
+        "title": "检测供应商",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "codexProviderManager.useProvider",
+        "title": "选择优先供应商",
+        "icon": "$(check)"
+      },
+      {
+        "command": "codexProviderManager.refresh",
+        "title": "Codex 管理：刷新",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "codexProviderManager.sessionDetails",
+        "title": "查看对话信息",
+        "icon": "$(info)"
+      },
+      {
+        "command": "codexProviderManager.archive",
+        "title": "归档选中对话",
+        "icon": "$(archive)"
+      },
+      {
+        "command": "codexProviderManager.unarchive",
+        "title": "取消归档",
+        "icon": "$(discard)"
+      },
+      {
+        "command": "codexProviderManager.delete",
+        "title": "删除选中对话",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "codexProviderManager.searchSessions",
+        "title": "Codex 管理：搜索对话",
+        "icon": "$(search)"
+      },
+      {
+        "command": "codexProviderManager.backup",
+        "title": "Codex 管理：备份全部对话",
+        "icon": "$(save-all)"
+      },
+      {
+        "command": "codexProviderManager.monitorSettings",
+        "title": "Codex 管理：设置监控时间",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "codexProviderManager.toggleMonitor",
+        "title": "Codex 管理：开启 / 暂停监控",
+        "icon": "$(watch)"
+      },
+      {
+        "command": "codexProviderManager.startProxy",
+        "title": "Codex 管理：启动分组代理",
+        "icon": "$(play)"
+      },
+      {
+        "command": "codexProviderManager.stopProxy",
+        "title": "Codex 管理：停止代理",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "codexProviderManager.proxyConfig",
+        "title": "Codex 管理：生成代理接入配置"
+      },
+      {
+        "command": "codexProviderManager.openGuide",
+        "title": "Codex 管理：打开使用说明",
+        "icon": "$(book)"
+      },
+      {
+        "command": "codexProviderManager.startAgent",
+        "title": "Codex 管理：启动本机后台"
+      },
+      {
+        "command": "codexProviderManager.stopAgent",
+        "title": "Codex 管理：停止本机后台"
+      },
+      {
+        "command": "codexProviderManager.agentStatus",
+        "title": "Codex 管理：查看后台状态"
+      },
+      {
+        "command": "codexProviderManager.agentOperation",
+        "title": "Codex 管理：查询后台操作结果"
+      },
+      {
+        "command": "codexProviderManager.installAgentService",
+        "title": "Codex 管理：安装 Linux 用户后台服务"
+      },
+      {
+        "command": "codexProviderManager.removeAgentService",
+        "title": "Codex 管理：移除 Linux 用户后台服务"
+      },
+      {
+        "command": "codexProviderManager.checkProviderConfig",
+        "title": "Codex 管理：检查 API 配置（不发请求）"
+      },
+      {
+        "command": "codexProviderManager.testProviderTools",
+        "title": "Codex 管理：测试工具调用格式"
+      },
+      {
+        "command": "codexProviderManager.addOfficialAccount",
+        "title": "Codex 管理：新增官方账号"
+      },
+      {
+        "command": "codexProviderManager.saveCurrentOfficialAccount",
+        "title": "Codex 管理：保存当前官方账号"
+      },
+      {
+        "command": "codexProviderManager.upgradeAgent",
+        "title": "Codex 管理：升级本机后台"
+      },
+      {
+        "command": "codexProviderManager.enableSmoothSwitch",
+        "title": "Codex 管理：启用本机平滑切换"
+      },
+      {
+        "command": "codexProviderManager.disableSmoothSwitch",
+        "title": "Codex 管理：恢复官方启动入口"
+      },
+      {
+        "command": "codexProviderManager.reloadEditor",
+        "title": "Codex 管理：重新加载当前窗口"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "codexProviderManager.openDashboard",
+          "when": "view == codexProviderManager.providers || view == codexProviderManager.monitor",
+          "group": "navigation@0"
+        },
+        {
+          "command": "codexProviderManager.addProvider",
+          "when": "view == codexProviderManager.providers",
+          "group": "navigation@1"
+        },
+        {
+          "command": "codexProviderManager.refresh",
+          "when": "view == codexProviderManager.providers || view == codexProviderManager.sessions",
+          "group": "navigation@2"
+        },
+        {
+          "command": "codexProviderManager.searchSessions",
+          "when": "view == codexProviderManager.sessions",
+          "group": "navigation@1"
+        },
+        {
+          "command": "codexProviderManager.monitorSettings",
+          "when": "view == codexProviderManager.monitor",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "codexProviderManager.useProvider",
+          "when": "viewItem == provider",
+          "group": "inline@1"
+        },
+        {
+          "command": "codexProviderManager.testProvider",
+          "when": "viewItem == provider",
+          "group": "inline@2"
+        },
+        {
+          "command": "codexProviderManager.editProvider",
+          "when": "viewItem == provider",
+          "group": "manage@1"
+        },
+        {
+          "command": "codexProviderManager.setKey",
+          "when": "viewItem == provider",
+          "group": "manage@2"
+        },
+        {
+          "command": "codexProviderManager.removeProvider",
+          "when": "viewItem == provider",
+          "group": "manage@3"
+        },
+        {
+          "command": "codexProviderManager.archive",
+          "when": "viewItem == activeSession",
+          "group": "manage@1"
+        },
+        {
+          "command": "codexProviderManager.unarchive",
+          "when": "viewItem == archivedSession",
+          "group": "manage@1"
+        },
+        {
+          "command": "codexProviderManager.delete",
+          "when": "viewItem == activeSession || viewItem == archivedSession",
+          "group": "manage@2"
+        },
+        {
+          "command": "codexProviderManager.sessionDetails",
+          "when": "viewItem == activeSession || viewItem == archivedSession",
+          "group": "manage@3"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Codex Provider Manager",
+      "properties": {
+        "codexProviderManager.codexHome": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "留空使用 CODEX_HOME 或当前用户的 .codex。"
+        },
+        "codexProviderManager.codexPath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "Codex 可执行文件的绝对路径；留空自动查找。"
+        },
+        "codexProviderManager.pythonPath": {
+          "type": "string",
+          "default": "python3",
+          "scope": "machine",
+          "description": "用于 SQLite 一致备份的 Python 3（3.10 或以上）。"
+        },
+        "codexProviderManager.nodePath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "后台使用的 Node.js 20+ 可执行文件；留空使用当前 VS Code 的运行程序。"
+        },
+        "codexProviderManager.agentStorageRoot": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "独立后台状态根目录；留空使用 ~/.local/share/codex-provider-manager。修改后需重载窗口，且先停止旧后台。"
+        }
+      }
+    }
+  }
+}
